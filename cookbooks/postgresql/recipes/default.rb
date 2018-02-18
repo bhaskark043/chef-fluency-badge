@@ -5,14 +5,14 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
 package 'postgresql-server' do
-	notifies :run, 'execute[postgresql-init]'
+	notifies :run,'execute[postgresql-init]',:immediately
 end
 
-excecute 'postgresql-init' do
+execute 'postgresql-init' do
 	command 'postgresql-setup initdb'
 	action :nothing
 end
 	
-ervice 'postgresql' do
+service 'postgresql' do
 	action [:enable, :start]
 end
